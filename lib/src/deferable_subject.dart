@@ -10,6 +10,7 @@ class DeferableSubject<T> {
   Stream<T> outputStream;
   dynamic _lastestValue;
   StreamController<T> controller;
+  bool isDisposed;
   DeferableSubject(
       {Stream<T> Function(Stream<T> stream) transformInput,
       bool cacheLatest = true}) {
@@ -33,11 +34,13 @@ class DeferableSubject<T> {
   }
   T get output => _lastestValue;
   set input(T value) {
+    if (isDisposed == true) return;
     _lastestValue = value;
     controller.add(value);
   }
 
   dispose() {
+    isDisposed = true;
     outputSubscription.cancel();
     controller.close();
     outputStream.drain();
