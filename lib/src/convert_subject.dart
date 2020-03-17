@@ -14,6 +14,7 @@ class ConvertSubject<I, O> {
   Stream<O> outputStream;
   dynamic _lastestValue;
   StreamController<I> controller;
+  bool isDisposed;
 
   ConvertSubject(Stream<O> Function(I input) process,
       {ConvertType convertType = ConvertType.flatMap,
@@ -60,9 +61,14 @@ class ConvertSubject<I, O> {
   }
 
   O get output => _lastestValue;
-  set input(I value) => controller.add(value);
+  set input(I value) {
+    if (isDisposed == true) return;
+    _lastestValue = value;
+    controller.add(value);
+  }
 
   dispose() {
+    isDisposed = true;
     outputSubscription.cancel();
     inputSubscription.cancel();
     _subscription.cancel();

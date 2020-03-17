@@ -13,6 +13,7 @@ class SwitchSubject<I, O> {
   Stream<O> outputStream;
   dynamic _lastestValue;
   StreamController<I> controller;
+  bool isDisposed;
 
   SwitchSubject(Stream<O> Function(I input) process,
       {Stream<I> Function(Stream<I> stream) transformInput,
@@ -43,11 +44,13 @@ class SwitchSubject<I, O> {
 
   O get output => _lastestValue;
   set input(I value) {
+    if (isDisposed == true) return;
     _lastestValue = value;
     controller.add(value);
   }
 
   dispose() {
+    isDisposed = true;
     outputSubscription.cancel();
     inputSubscription.cancel();
     controller.close();
