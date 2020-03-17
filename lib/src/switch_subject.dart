@@ -45,9 +45,9 @@ class SwitchSubject<I, O> {
   }
 
   O get output => _lastestValue;
+
   set input(I value) {
     if (isDisposed == true) return;
-    _lastestValue = value;
     controller.add(value);
   }
 
