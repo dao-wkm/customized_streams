@@ -38,7 +38,9 @@ class SwitchSubject<I, O> {
 
     outputSubscription = observableOutput.listen(null);
 
-    outputStream = DeferStream(() => observableOutput.startWith(_lastestValue),
+    outputStream = DeferStream(
+        () => observableOutput
+            .startWith(isDisposed == true ? null : _lastestValue),
         reusable: true);
   }
 

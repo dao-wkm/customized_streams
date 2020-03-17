@@ -42,7 +42,8 @@ class ConvertSubject<I, O> {
       // case ConvertType.concatMap:
       //   observableOutput = inputStream.concatMap(process);
       //   break;
-      default: break;
+      default:
+        break;
     }
 
     if (transformOutput != null) {
@@ -56,7 +57,9 @@ class ConvertSubject<I, O> {
 
     outputSubscription = observableOutput.listen(null);
 
-    outputStream = DeferStream(() => observableOutput.startWith(_lastestValue),
+    outputStream = DeferStream(
+        () => observableOutput
+            .startWith(isDisposed == true ? null : _lastestValue),
         reusable: true);
   }
 
