@@ -8,7 +8,6 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  analyzer: 0.41.1
   rxdart: 0.25.0
 
 dev_dependencies:
