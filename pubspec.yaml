@@ -1,6 +1,6 @@
 name: customized_streams
 description: This library contains customized streams.
-version: 1.0.13
+version: 1.0.14
 author: Le Anh Dao <leanhdaoit@gmail.com>
 homepage: https://github.com/dao-wkm/customized_streams
 
@@ -8,8 +8,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  analyzer: 0.39.10
-  rxdart: 0.24.1
+  analyzer: 0.41.1
+  rxdart: 0.25.0
 
 dev_dependencies:
-  test: ^1.14.3
+  test: ^1.15.7
